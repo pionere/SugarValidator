@@ -15,9 +15,11 @@ const fileData = fs.readFileSync(process.argv[2], { encoding: 'UTF-8' });
 const { errors, warnings } = validate(fileData);
 
 for (const passage in errors) {
-    const error = errors[passage];
+    const passageErrors = errors[passage];
     console.log('\x1b[31m' + passage + '\x1b[0m');
-    console.log(error);
+    for (const error of passageErrors) {
+        console.log(error);
+    }
     console.log('');
 }
 
