@@ -270,7 +270,6 @@
                     _errors.appendChild(document.createTextNode('No errors were found!'));
                 } else {
                     for (const passage of errorPassages) {
-                        const error = errors[passage];
                         const _error = document.createElement('div');
                         _error.classList.add('error');
                         _errors.appendChild(_error);
@@ -278,10 +277,14 @@
                         _errorTitle.classList.add('error-title');
                         _errorTitle.appendChild(document.createTextNode(passage));
                         _error.appendChild(_errorTitle);
-                        const _errorMessage = document.createElement('p');
-                        _errorMessage.classList.add('error-message');
-                        _errorMessage.appendChild(document.createTextNode(error));
-                        _error.appendChild(_errorMessage);
+
+                        const passageErrors = errors[passage];
+                        for (const errorLine of passageErrors) {
+                            const _errorMessage = document.createElement('p');
+                            _errorMessage.classList.add('error-message');
+                            _errorMessage.appendChild(document.createTextNode(errorLine));
+                            _error.appendChild(_errorMessage);
+                        }
                     }
                 }
 
