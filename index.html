@@ -132,10 +132,6 @@
             font-family: monospace;
             color: #F55;
         }
-        p.error-message {
-            font-family: monospace;
-            margin: .3em 0;
-        }
         h5.warning-title {
             margin: 0;
             font-family: monospace;
@@ -252,7 +248,7 @@
                 _errorsTitle.classList.add('errors-title');
                 _errorsTitle.appendChild(document.createTextNode('Errors'));
                 _errors.append(_errorsTitle);
-                
+
                 const _warnings = document.createElement('div');
                 _warnings.classList.add('file-warnings');
                 _file.appendChild(_warnings);
@@ -260,7 +256,7 @@
                 _warningsTitle.classList.add('warnings-title');
                 _warningsTitle.appendChild(document.createTextNode('Warnings'));
                 _warnings.append(_warningsTitle);
-                
+
                 const { errors, warnings } = result.result;
 
                 // Show errors
@@ -293,7 +289,6 @@
                 if (warningTitles.length === 0) {
                     _warnings.classList.add('no-warnings');
                     _warnings.appendChild(document.createTextNode('No warnings were found!'));
-
                 } else {
                     for (const warningTitle of warningTitles) {
                         const _warning = document.createElement('div');
