@@ -111,7 +111,8 @@
             padding-left: 20px;
         }
         .file-errors,
-        .file-warnings {
+        .file-warnings,
+        .file-infos {
             margin-bottom: 20px;
         }
         .file-errors.no-errors {
@@ -124,7 +125,8 @@
             margin: 10px 0 0;
         }
         .error + .error,
-        .warning + .warning {
+        .warning + .warning
+        .info + .info {
             margin-top: 15px;
         }
         h5.error-title {
@@ -137,7 +139,13 @@
             font-family: monospace;
             color: #FC0;
         }
+        h5.info-title {
+            margin: 0;
+            font-family: monospace;
+            color: #FFF;
+        }
         p.error-message,
+        p.info-message,
         p.warning-line {
             font-family: monospace;
             margin: .3em 0;
@@ -257,7 +265,15 @@
                 _warningsTitle.appendChild(document.createTextNode('Warnings'));
                 _warnings.append(_warningsTitle);
 
-                const { errors, warnings } = result.result;
+                const _infos = document.createElement('div');
+                _infos.classList.add('file-infos');
+                _file.appendChild(_infos);
+                const _infosTitle = document.createElement('h4');
+                _infosTitle.classList.add('infos-title');
+                _infosTitle.appendChild(document.createTextNode('Infos'));
+                _infos.append(_infosTitle);
+
+                const { errors, warnings, infos } = result.result;
 
                 // Show errors
                 const errorPassages = Object.keys(errors);
@@ -322,6 +338,27 @@
                                 _warningLine.innerHTML = html;
                                 _warningGroup.appendChild(_warningLine);
                             }
+                        }
+                    }
+                }
+
+                // Show infos
+                const infoTitles = Object.keys(infos);
+                {
+                    for (const infoKey of infoTitles) {
+                        const _info = document.createElement('div');
+                        _info.classList.add('info');
+                        _infos.appendChild(_info);
+                        const _infoTitle = document.createElement('h5');
+                        _infoTitle.classList.add('info-title');
+                        _infoTitle.appendChild(document.createTextNode(infoKey));
+                        _info.appendChild(_infoTitle);
+
+                        for (const infoLine of infos[infoKey]) {
+                            const _infoMessage = document.createElement('p');
+                            _infoMessage.classList.add('info-message');
+                            _infoMessage.appendChild(document.createTextNode(infoLine));
+                            _info.appendChild(_infoMessage);
                         }
                     }
                 }
