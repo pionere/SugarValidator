@@ -211,7 +211,7 @@
                     resolve(result.data);
                     worker.terminate();
                 };
-                worker.postMessage({ fileData, CSS: window.CSS, localStorage: localStorage.ignore ? JSON.parse(localStorage.ignore) : {} });
+                worker.postMessage({ fileData, localStorage: localStorage.ignore ? JSON.parse(localStorage.ignore) : {} });
             });
         };
 
